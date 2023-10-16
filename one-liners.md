@@ -7,4 +7,6 @@
 `
 
 ##  0xNinja Subdomain Enumeration 
-`python3 cet.py --domain paytmlabs.com | sed -e 's:^ *::g' -e 's:^*\.::g' -e '/^$/d' | sed -e 's:*.::g' | sort -u | grep -o -E '[a-zA-Z0-9.-]+\.(com)'  |tee -a 2.txt`
+`python3 cet.py --domain target.com | sed -e 's:^ *::g' -e 's:^*\.::g' -e '/^$/d' | sed -e 's:*.::g' | sort -u | grep -o -E '[a-zA-Z0-9.-]+\.(com)'  |tee -a 2.txt`
+
+`./crt.sh paytmlabs.com | tee -a 2.txt`
