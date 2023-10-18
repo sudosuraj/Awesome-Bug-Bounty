@@ -10,6 +10,16 @@
 `cat subfinder.txt | dnsx -silent -a -resp-only | anew IPs.txt`
 
 ##  0xNinja Subdomain Enumeration 
+### 1 Subdomain Enumeration of single domain
 `python3 cet.py --domain target.com | sed -e 's:^ *::g' -e 's:^*\.::g' -e '/^$/d' | sed -e 's:*.::g' | sort -u | grep -o -E '\b[a-zA-Z0-9.-]*target[a-zA-Z0-9.-]*\.(com)\b' |tee -a 2.txt`
 
 `./crt.sh paytmlabs.com | tee -a 2.txt`
+
+
+### 2 Subdomain Enumeration of multiple domains (inscope-domains.txt)
+`cat inscope-domains.txt | xargs -I {} -n 1 python3 cet.py --domain {} |  sed -e 's:^ *::g' -e 's:^*\.::g' -e '/^$/d' | sed -e 's:*.::g' | sort -u | grep -o -E '\b[a-zA-Z0-9.-]*target[a-zA-Z0-9.-]*\.(com)\b' |tee -a 2.txt `
+
+`cat inscope-domains.txt | xargs -I {} -n 1 bash crt.sh | tee -a 2.txt  `
+
+
+
