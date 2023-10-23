@@ -21,5 +21,12 @@
 
 `cat inscope-domains.txt | xargs -I {} -n 1 bash crt.sh | tee -a 2.txt  `
 
+### 3 Resolving Live subdomains
+Download fresh resolvers: [here](https://raw.githubusercontent.com/proabiral/Fresh-Resolvers/master/resolvers.txt)
+`wget https://raw.githubusercontent.com/proabiral/Fresh-Resolvers/master/resolvers.txt`
+`massdns -r resolvers.txt -t A -o S subdomains.txt -w resolved.txt`
+`puredns resolve subdomains.txt -r resolvers.txt --resolvers-trusted trusted.txt | anew resolved2.txt`
+`dnsx -l subdomains.txt -r resolvers.txt -a -resp -o resolved1.txt`
+
 
 
