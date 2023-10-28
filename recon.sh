@@ -32,3 +32,8 @@ rm -rf resolved2.txt
 echo "IP Address Enumeration ..."
 cat resolved.txt | xargs -I {} -n 1 dig +short {} | xargs -n 1 -I {} whois -h whois.cymru.com {} | grep -oE "([0-9]{1,3}\.){3}[0-9]{1,3}" | anew IPs.txt
 cat resolved.txt | dnsx -silent -a -resp-only | anew IPs.txt
+
+echo "Running Port Scanning"
+sudo nmap -iL IPs.txt  -p0-65535 -vv -oN nmap-fullscan-ip.txt
+sudo nmap -iL resolved.txt  -p0-65535 -vv -oN nmap-fullscan-subs.txt
+
