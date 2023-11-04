@@ -2,15 +2,15 @@
 
 echo "subdomain enumeration ..."
 subfinder -dL scope.txt| anew subdomains.txt
-assetfinder -subs-only paytm.in  | anew subdomains.txt
-assetfinder -subs-only paytm.com  | anew subdomains.txt
-assetfinder -subs-only mypaytm.com  | anew subdomains.txt
-sublist3r -d paytm.in | anew subdomains.txt
-sublist3r -d paytm.com | anew subdomains.txt
-sublist3r -d mypaytm.com | anew subdomains.txt
-crt paytm.in | anew subdomains.txt
-crt paytm.com| anew subdomains.txt
-crt mypaytm.com | anew subdomains.txt
+assetfinder -subs-only $1  | anew subdomains.txt
+#ssetfinder -subs-only $1  | anew subdomains.txt
+#assetfinder -subs-only $1  | anew subdomains.txt
+sublist3r -d $1 | anew subdomains.txt
+#sublist3r -d paytm.com | anew subdomains.txt
+#sublist3r -d mypaytm.com | anew subdomains.txt
+crt $1 | anew subdomains.txt
+#crt $1 | anew subdomains.txt
+#crt mypaytm.com | anew subdomains.txt
 
 echo "resolving subdomains ..."
 wget https://raw.githubusercontent.com/proabiral/Fresh-Resolvers/master/resolvers.txt
