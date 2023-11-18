@@ -5,13 +5,6 @@ NL='\e[0m'
 WH='\e[97m'
 BL='\e[34m'
 
-#!/bin/bash
-OR='\e[38;5;202m'
-GR='\e[32m'
-NL='\e[0m'
-WH='\e[97m'
-BL='\e[34m'
-
 echo -e "
 ${OR} ${NL}
 ${OR}                 _                                 _ ${NL}
