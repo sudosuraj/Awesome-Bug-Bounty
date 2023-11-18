@@ -57,7 +57,7 @@ cat resolved2.txt | anew resolved.txt
 rm -rf resolved2.txt
 
 echo "HTTPX on resolved.txt ..."
-cat resolved.txt | httpx -sc -title  -td 
+cat resolved.txt | httpx -sc -title  -td -fr -cname
 
 echo "IP Address Enumeration ..."
 cat resolved.txt | xargs -I {} -n 1 dig +short {} | xargs -n 1 -I {} whois -h whois.cymru.com {} | grep -oE "([0-9]{1,3}\.){3}[0-9]{1,3}" | anew IPs.txt
