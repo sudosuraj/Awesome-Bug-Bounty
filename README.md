@@ -1,7 +1,7 @@
 # Awesome Bug Bounty
 This is my personal repo including bug bounty tips, tools collections, one lines I personally prefer while hunting, and so on. It is under development, so feel free to contribute.
 
-## But, How to reocon?
+## But, How to recon?
 Using this scrip, it automates the recon process like; subdomain enumeration, resolving subdomains, IP address gathering, port scanning on IP addressses, and as of now, I am currently working on it, I will add more functionality and approach in this script
 
 ### Running The Script
