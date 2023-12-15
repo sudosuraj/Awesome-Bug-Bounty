@@ -191,7 +191,7 @@ if (isset($_GET["feature"])) {
 
     <head>
         <meta charset="UTF-8" />
-        <title>p0wny@shell:~#</title>
+        <title>.[]shell:~#</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <style>
             html, body {
