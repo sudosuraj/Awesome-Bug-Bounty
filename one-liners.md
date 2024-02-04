@@ -33,4 +33,14 @@ Download fresh resolvers: [here](https://raw.githubusercontent.com/proabiral/Fre
 `dnsx -l subdomains.txt -r resolvers.txt -a -resp -o resolved1.txt`
 
 
+### 4. Find Subdomains of multiple tld
+```bash
+while read domain; do if host “$domain” > /dev/null; then echo $domain;fi;done<DutchGov.txt >> domains.txt
+for sub in $(cat domains.txt);do subfinder -d $sub -o $sub.dutch;done
+cat *.dutch > all.sub
+```
 
+### 5. FUZZ Multile Domains at once
+```Bash
+for i in $(cat all.sub); do echo””; echo “Subdomain of $i”;echo “”;gobuster dir -w wordlist.txt -u $i -e -o tmp ;cat tmp >> dutch.fuzz; echo “”; done
+```
