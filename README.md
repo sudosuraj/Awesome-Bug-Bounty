@@ -1,7 +1,7 @@
 # Awesome Bug Bounty
 >_ Web Pentest Methodology by @sudosuraj
 
-This is my personal repo including bug bounty tips, tools collections, one liners I personally prefer while hunting, and so on. It is under development, so feel free to contribute.
+This is my personal repo including bug bounty tips, tools collections, one liners I personally prefer while hunting, and so on. It is under development, so feel free to [contribute](https://github.com/sudosuraj/Awesome-Bug-Bounty/issues/new).
 
 ## Tools Installation
 
