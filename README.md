@@ -27,7 +27,6 @@ Now you have:
 
 ## Tools Installation
 
-external tip by noob rahul: pdtm by pd 😎
 ```@bash
 #!/bin/bash
 
