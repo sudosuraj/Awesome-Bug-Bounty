@@ -24,6 +24,7 @@ go install github.com/003random/getJS/v2@latest
 sudo apt install python3-pip
 pip3 install uro
 pip3 install urless
+pipx install bbot
 
 git clone https://github.com/0xRyuk/crtsh.git /tmp/crtsh
 pip3 install -r /tmp/crtsh/requirments.txt
@@ -51,11 +52,13 @@ sudo echo 'alias linkfinder="python3 /opt/linkfinder/linkfinder.py"'>>~/.zshrc
 ### Enumaration :
 ```@bash
 subfinder -dL domains.txt -all  -recursive | anew rawsubdomains.txt
-cat domains.txt | while read domain; do assetfinder $domain -subs-only && anew rawsubdomains.txt; done 
-cat domains.txt | while read domain; do crtsh -d $domain && anew rawsubdomains.txt; done 
 
-cat subdomains.txt | httpx -ports 66,80,81,443,445,457,1080,1100,1241,1352,1433,1434,1521,1944,2301,3000,3128,3306,4000,4001,4002,4100,5000,5432,
-5800,5801,5802,6346,6347,7001,7002,8000,8080,8443,8888,30821 -threads 300 -title -td  -follow-redirects -silent | anew alive.txt
+cat domains.txt | while read domain; do assetfinder $domain -subs-only && anew rawsubdomains.txt; done
+
+cat domains.txt | while read domain; do crtsh -d $domain && anew rawsubdomains.txt; done
+
+for i in $(cat domains.txt);do bbot -t $i -p subdomain-enum; done
+
 ```
 
 ### Resolving: 
