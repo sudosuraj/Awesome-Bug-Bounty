@@ -129,6 +129,8 @@ cat alive.txt | gau | anew allurls.txt
 
 katana -u alive.txt -d 5 -ps -pss waybackarchive,commoncrawl,alienvault -kf -jc -fx -ef woff,css,png,svg,jpg,woff2,jpeg,gif,svg -o allurls.txt
 
+katana -u alive.txt -d 4 -f qurl -o allurls.txt
+
 cat alive.txt | hakrawler | anew allurls.txt
 
 cat allurls.txt | grep -E "\.txt|\.log|\.cache|\.secret|\.db|\.backup|\.bkp|\.yml|\.json|\.gz|\.rar|\.gzip|\.zip|\.config"
