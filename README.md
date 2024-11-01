@@ -137,11 +137,18 @@ cat allurls.txt | grep -E "\.txt|\.log|\.cache|\.secret|\.db|\.backup|\.bkp|\.ym
 ```
 
 ## Parameter Discovery
+### Collect URLs with parameters
 ```@bash
-cat allurls.txt|grep -v -i -E "\.js" | grep -P '(?<=\?|&)\w+(?==|&)' | uro | params.txt
+cat allurls.txt|grep -v -i -E "\.js" | grep -P '(?<=\?|&)\w+(?==|&)' | uro | tee -a paramsurls.txt
 
-for i in $(cat subdomains.txt); do paramspider -d $i | anew param.txt; done
+for i in $(cat subdomains.txt); do paramspider -d $i | anew paramurls.txt; done
+
 ```
+### Colloect prameter words for wordlist
+```@bash
+cat allurls.txt | grep -oP '(?<=\?|&)\w+(?==|&)' |  tee -a params.txt
+```
+
 
 
 ## Find and enumerate JavaScript Files
