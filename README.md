@@ -138,7 +138,7 @@ cat allurls.txt | grep -E "\.txt|\.log|\.cache|\.secret|\.db|\.backup|\.bkp|\.ym
 
 ## Parameter Discovery
 ```@bash
-cat allurls.txt | uro | grep "=" | anew params.txt
+cat allurls.txt|grep -v -i -E "\.js" | grep -P '(?<=\?|&)\w+(?==|&)' | uro | params.txt
 
 for i in $(cat subdomains.txt); do paramspider -d $i | anew param.txt; done
 ```
