@@ -279,3 +279,8 @@ for i in $(cat all.sub); do echo””; echo “Subdomain of $i”;echo “”;g
 ## Using censys to collect IP
 `censys search hackerone.com | grep "ip" | egrep -v "description" | cut -d ":" -f2 | tr -d \"\, | tee IPs.txt`
 
+
+
+## Tags
+Bug Bounty, Pentesting, Security, Hacking, Vulnerability Assessment, Web Security, Ethical Hacking, Cybersecurity, Security Tools, Information Security, Penetration Testing, OSINT, Subdomain Enumeration, Content Discovery, SQL Injection, JavaScript Analysis, GraphQL Security, Subdomain Takeover, Port Scanning, Technology Detection
+
