@@ -1,0 +1,9 @@
+VirusTotal: javascript:window.location="https://www.virustotal.com/vtapi/v2/domain/report?apikey=<VTAPI-Key>&domain="+encodeURIComponent(window.location.host)
+
+URLScan: javascript:window.location="https://urlscan.io/api/v1/search/?size=10000&q=domain:"+encodeURIComponent(window.location.host)
+
+Wayback: javascript:window.location="https://web.archive.org/cdx/search/cdx?output=text&fl=original&collapse=urlkey&url=*.%22+encodeURIComponent(window.location.host)
+
+Censys: javascript:window.location="https://search.censys.io/search?resource=hosts&sort=RELEVANCE&per_page=25&virtual_hosts=INCLUDE&q=services.http.response.html_title:%22+encodeURIComponent(%27%22%27%20+%20document.title%20+%20%27%22%27);
+
+FREEDIUM: javascript:window.location="https://freedium.cfd/"+encodeURIComponent(window.location)
