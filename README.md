@@ -60,6 +60,10 @@ cat domains.txt | while read domain; do crtsh -d $domain && anew rawsubdomains.t
 for i in $(cat domains.txt);do bbot -t $i -p subdomain-enum; done
 
 ```
+- Using VirusTotal:
+```@bash
+curl https://www.virustotal.com/vtapi/v2/domain/report\?apikey\=<VTAPI-KEY>\&domain\=target.com | jq '.domain_siblings[]' | tr '"' ' ' | anew subdomains.txt
+``` 
 
 ### Resolving: 
 ```@bash
