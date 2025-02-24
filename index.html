@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Awesome Bug Bounty Resources</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        body { background-color: #f8f9fa; }
+        .repo-container { margin-top: 2rem; }
+        .file-tree {
+            background: white;
+            border-radius: 8px;
+            padding: 1rem;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            height: 80vh;
+            overflow-y: auto;
+        }
+        .readme-container {
+            background: white;
+            border-radius: 8px;
+            padding: 2rem;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            height: 80vh;
+            overflow-y: auto;
+        }
+        .tree-item { cursor: pointer; padding: 4px 0; }
+        .tree-item:hover { background-color: #f8f9fa; }
+        .folder-items { margin-left: 1.5rem; }
+        .spinner { color: #0d6efd; }
+    </style>
+</head>
+<body>
+    <div class="container repo-container">
+        <div class="row g-4">
+            <div class="col-lg-4">
+                <div class="file-tree">
+                    <h4 class="mb-3"><i class="fas fa-folder-open"></i> Repository Files</h4>
+                    <div id="tree" class="tree-list"></div>
+                    <div id="loading" class="text-center mt-3">
+                        <div class="spinner-border spinner" role="status">
+                            <span class="visually-hidden">Loading...</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-8">
+                <div class="readme-container">
+                    <div id="readme-content"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <script>
+        const REPO_OWNER = 'sudosuraj';
+        const REPO_NAME = 'Awesome-Bug-Bounty';
+        const BRANCH = 'main';
+        
+        // Fetch and render README
+        fetch(`https://raw.githubusercontent.com/${REPO_OWNER}/${REPO_NAME}/${BRANCH}/README.md`)
+            .then(response => response.text())
+            .then(markdown => {
+                document.getElementById('readme-content').innerHTML = marked.parse(markdown);
+            });
+
+        // Fetch and render file tree
+        async function fetchContents(path = '') {
+            try {
+                const response = await fetch(
+                    `https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}/contents/${path}`,
+                    { headers: { 'Accept': 'application/vnd.github.v3+json' } }
+                );
+                const contents = await response.json();
+                document.getElementById('loading').style.display = 'none';
+                return contents.filter(item => 
+                    item.name !== 'README.md' && item.name !== 'index.html'
+                );
+            } catch (error) {
+                console.error('Error fetching contents:', error);
+                return [];
+            }
+        }
+
+        function createTreeItem(item, level = 0) {
+            const li = document.createElement('li');
+            li.className = 'tree-item d-flex align-items-center';
+            li.style.paddingLeft = `${level * 15}px`;
+
+            const icon = item.type === 'dir' ? 
+                '<i class="fas fa-folder text-warning me-2"></i>' : 
+                '<i class="fas fa-file text-secondary me-2"></i>';
+
+            li.innerHTML = `${icon}<a href="${item.html_url}" target="_blank" class="text-decoration-none">${item.name}</a>`;
+
+            if (item.type === 'dir') {
+                const ul = document.createElement('ul');
+                ul.className = 'folder-items list-unstyled';
+                li.appendChild(ul);
+                
+                let loaded = false;
+                li.addEventListener('click', async (e) => {
+                    if (!loaded && e.target.tagName !== 'A') {
+                        const contents = await fetchContents(item.path);
+                        ul.innerHTML = contents.map(subItem => 
+                            createTreeItem(subItem, level + 1).outerHTML
+                        ).join('');
+                        loaded = true;
+                    }
+                });
+            }
+
+            return li;
+        }
+
+        async function renderFileTree() {
+            const treeContainer = document.getElementById('tree');
+            const rootContents = await fetchContents();
+            
+            rootContents.forEach(item => {
+                treeContainer.appendChild(createTreeItem(item));
+            });
+        }
+
+        renderFileTree();
+    </script>
+</body>
+</html>
